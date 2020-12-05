@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.blog.mapper.ArticleTagMapper">
+    <insert id="addArticleTag" parameterType="ArticleTag">
+        insert into myblog.article_tag_relation
+        values(#{articleId}, #{tagId})
+    </insert>
+    <delete id="deleteArticleTag" parameterType="int">
+        delete from myblog.article_tag_relation
+        where article_id = #{articleId}
+    </delete>
+
+    <update id="updateArticleTag" parameterType="ArticleTag">
+        update myblog.article_tag_relation
+        set tag_id=#{tagId}
+        where article_id=#{articleId}
+    </update>
+
+    <select id="queryAllArticleTag" resultType="ArticleTag">
+        select * from myblog.article_tag_relation
+        where article_id=#{articleId}
+    </select>
+</mapper>

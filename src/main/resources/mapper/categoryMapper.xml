@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.springboot.blog.mapper.CategoryMapper">
+    <insert id="addCategory" parameterType="Category">
+        insert into myblog.category(category_name, brief, add_time, update_time)
+        values (#{categoryName}, #{brief}, current_time, current_time )
+    </insert>
+    <delete id="deleteCategory" parameterType="int">
+        delete from myblog.category
+        where category_id = #{categoryId}
+    </delete>
+    <update id="updateCategory" parameterType="Category">
+        update myblog.category
+        set category_name = #{categoryName}, update_time=current_time, brief=#{brief}
+        where category_id = #{categoryId}
+    </update>
+
+    <select id="queryByCategoryName" resultType="Category">
+        select * from myblog.category
+        where category_name like "%"#{categoryName}"%"
+    </select>
+
+    <select id="queryAllCategories" resultType="Category">
+        select * from myblog.category
+    </select>
+
+    <select id="queryCategoryById" resultType="Category">
+        select * from myblog.category
+        where category_id=#{categoryId}
+    </select>
+
+    <select id="queryMaxCategoryId" resultType="int">
+        select max(category_id) from myblog.category;
+    </select>
+</mapper>
